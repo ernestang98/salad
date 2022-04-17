@@ -1,0 +1,113 @@
+{% extends 'nouislider_libraries.html' %} 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<title>Linear Analysis</title>
+{% endblock %}
+{% block body %}
+<div class="form">
+<div class="title">Welcome to SaladStop!</div>
+<div class="subtitle">Please indicate your preferences.</div>
+<form action="/" method = "POST">
+{% for diet in injection["dietary_arr"] %}
+<div class="slider_component_wrapper">
+<h4>{{diet['label']}}</h4>
+<div class="slider_component">
+<div class="left_value value">
+<span name="min_{{diet['form']}}" id="{{diet['form']}}-lower-value"></span>
+<input type="hidden" name="min_{{diet['form']}}" id="{{diet['form']}}-input-lower-value" />
+</div>
+<div class="slider_component_itself_wrapper">
+<div id="{{diet['form']}}" class="slider_component_itself"></div>
+</div>
+<div class="right_value value">
+<span name="max_{{diet['form']}}" id="{{diet['form']}}-upper-value"></span>
+<input type="hidden" name="max_{{diet['form']}}" id="{{diet['form']}}-input-upper-value" />
+</div>
+</div>
+</div>
+<script>
+$('#{{diet["form"]}}').noUiSlider({
+start: [ parseInt('{{diet["min"]}}'), parseInt('{{diet["max"]}}') ],
+connect: true,
+range: {
+'min': parseInt('{{diet["min"]}}'),
+'max': parseInt('{{diet["max"]}}') 
+},
+step:  parseInt('{{diet["step"]}}')
+});
+$("#{{diet['form']}}").Link("lower").to($("#{{diet['form']}}-lower-value"));
+$("#{{diet['form']}}").Link("lower").to($("#{{diet['form']}}-input-lower-value"));
+$("#{{diet['form']}}").Link("upper").to($("#{{diet['form']}}-upper-value"));
+$("#{{diet['form']}}").Link("upper").to($("#{{diet['form']}}-input-upper-value"));
+</script>
+{% endfor %}
+<div class="slider_component_wrapper">
+<h4>Minimum number of premium ingredients</h4>
+<div class="slider_component">
+<div class="left_value value">
+<span>0.00</span>
+</div>
+<div class="slider_component_itself_wrapper">
+<div id="mpt" class="slider_component_itself"></div>
+</div>
+<div class="right_value value">
+<span name="max_mpt" id="mpt-upper-value"></span>
+<input type="hidden" id="mpt-input-upper-value" name="Max_Premium_Toppings" />
+</div>
+</div>
+</div>
+<script>
+$('#mpt').noUiSlider({
+    start: 10,
+    connect: 'lower',
+    range: {
+        'min': 0,
+        'max': 10
+    },
+    step: 1
+});
+$("#mpt").Link().to($("#mpt-upper-value"));
+$("#mpt").Link().to($("#mpt-input-upper-value"));
+</script>
+<div class="slider_component_wrapper">
+<h4>Budget</h4>
+<div class="slider_component">
+<div class="left_value value">
+<span>0.00</span>
+</div>
+<div class="slider_component_itself_wrapper">
+<div id="budget" class="slider_component_itself"></div>
+</div>
+<div class="right_value value">
+<span name="max_budget" id="budget-upper-value"></span>
+<input type="hidden" id="budget-input-upper-value" name="Budget" />
+</div>
+</div>
+</div>
+<script>
+$('#budget').noUiSlider({
+start: 50,
+connect: 'lower',
+range: {
+'min': 0,
+'max': 50
+},
+step: 1
+});
+$("#budget").Link().to($("#budget-upper-value"));
+$("#budget").Link().to($("#budget-input-upper-value"));
+</script>
+<div class="dietary_restriction_container">
+{% for restriction in injection["restriction_arr"] %}
+<div class="dietary_restriction_container_unit">
+<h4>{{restriction['name']}}</h4>
+<input type="checkbox" id="{{restriction['name']}}" name="{{restriction['name']}}" value="0">
+</div>
+{% endfor %}
+</div>
+<button type="text" class="submit">submit</button>
+</form>
+{% endblock %}
+{% block footer %}
+{% endblock %}
