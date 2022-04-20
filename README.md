@@ -1,6 +1,6 @@
 # Making salads great again!
 
-Optimisation of Salad Stop's business model in order to help improve their workflows
+Optimisation of Salad Stop's business model in order to help improve their business decisions and profits.
 
 ### 1. Overview
 
