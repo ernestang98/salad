@@ -24,7 +24,7 @@ Optimisation of Salad Stop's business model in order to help improve their workf
 
 - Proof of Concept solution
 	
-	- [Demonstration video](https://www.youtube.com/watch?v=5UleGgw6wuU)
+	- [Demonstration video](https://www.youtube.com/watch?v=s6ox9AYnqZU)
 
 	- Web application with a proper UI serving our optimisation models for end users 
 
